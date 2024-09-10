@@ -15,7 +15,7 @@ import 'error_handling/interceptors/unknown.dart';
 class DioConnection implements ApiService
 {
   late Dio dio;
-  late Dio dioForDownload;
+  // late Dio dioForDownload;
   DioConnection()
   {
     dio = Dio()
@@ -31,7 +31,7 @@ class DioConnection implements ApiService
 
     dio.interceptors.addAll(myInterceptors);
 
-    dioForDownload = Dio();
+    // dioForDownload = Dio();
   }
 
   static DioConnection? dioHelper;
@@ -54,7 +54,6 @@ class DioConnection implements ApiService
   }) async
   {
     final connectivityResult = await Connectivity().checkConnectivity();
-
     switch(connectivityResult)
     {
       case ConnectivityResult.none :
@@ -66,6 +65,7 @@ class DioConnection implements ApiService
 
       default:
         try{
+          await request.prepareDataForRequest();
           final Response response = await dio.request(
             request.endPoint,
             options: Options(

@@ -8,4 +8,5 @@ class ApiConstants
   // Auth
   static const String login = 'login';
   static const String signUp = 'register';
+  static const String refreshToken = 'register';
 }

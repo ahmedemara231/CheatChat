@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 
 import 'headers.dart';
@@ -25,5 +27,23 @@ class RequestModel
     this.onReceiveProgress,
     this.isFormData = false,
   });
+
+
+
+  Future<void> prepareDataForRequest()async
+  {
+    if(data != null)
+    {
+      for(MapEntry entry in data)
+      {
+        if(entry.value is File)
+        {
+          isFormData = true;
+          await entry.value.toMultiPartFile();
+        }
+      }
+    }
+  }
+
 }
 

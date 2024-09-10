@@ -1,6 +1,6 @@
 import 'dart:developer';
+import 'package:cheat_chat/model/remote/api_service/service/Api_constants.dart';
 import 'package:dio/dio.dart';
-
 import '../../../../../local/secure.dart';
 import '../../request_model/headers.dart';
 import '../../request_model/request_model.dart';
@@ -21,6 +21,7 @@ class BadResponseInterceptor extends InterceptorsWrapper
       {
         case 400:
         // bad request
+
         case 401:
           log(err.response!.statusMessage!);
           await _refreshToken();
@@ -29,7 +30,8 @@ class BadResponseInterceptor extends InterceptorsWrapper
                 method: err.requestOptions.method,
                 endPoint: err.requestOptions.path,
                 headers: HeadersWithToken()
-            ), handler,
+            ),
+            handler,
           );
 
         default:
@@ -44,7 +46,7 @@ class BadResponseInterceptor extends InterceptorsWrapper
   Future<void> _refreshToken() async
   {
     await dio.post(
-        'refresh',
+        ApiConstants.refreshToken,
         options: Options(
             headers: await HeadersWithToken().toJson()
         )
