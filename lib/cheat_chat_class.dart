@@ -1,4 +1,5 @@
 import 'package:cheat_chat/view/home/home.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,7 +35,7 @@ class _CheatChatAppState extends State<CheatChatApp> {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
-        title: 'Cheat Chat',
+        title: 'Cheat Chat'.tr(),
         debugShowCheckedModeBanner: false,
         theme: CacheHelper.getInstance().shared.getBool('appTheme') == false
             ? ThemeData.light()
